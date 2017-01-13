@@ -1,0 +1,154 @@
+<div data-page="home" class="page">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="center">Arubait</div>
+            <div class="right">
+                <a href="" class="link icon-only" onclick="cari()"><i class="material-icons" >search</i></a>
+                <a href="#" class="link icon-only"><i class="material-icons">book</i></a>
+                <a href="notification.html" class="link icon-only"><i class="material-icons">notifications</i><span class="badge" style="color:#5a5a5a; position: absolute;border-radius: 50%; width: 20px; height: 20px; line-height: 20px; text-align: center; left: 20px;top: 13px; background: #ffc400;">2</span></a>
+
+            </div>
+        </div>
+    </div>
+
+    
+    <form id="cari" data-search-list=".search-here" data-search-in=".item-title" class="searchbar searchbar-init">
+        <div class="searchbar-input">
+            <input type="search" placeholder="Search" style="color: white !important;">
+            <a href="#" class="searchbar-clear" onclick="pangkah()"></a>
+        </div>
+    </form>
+    <div class="toolbar tabbar">
+        <div class="toolbar-inner ">
+            <a href="#tab1" class="tab-link active"><i class="icon-tab material-icons">home</i><span class="tabbar-label">Seek Job</span></a>
+            <a href="#tab2" class="tab-link"><i class="icon-tab material-icons">assignment_ind</i><span class="tabbar-label">Job Applied</span></a>
+            <a href="#tab3" class="tab-link"><i class="icon-tab material-icons">person_pin</i><span class="tabbar-label">Job Offered</span></a>
+            <a href="#tab4" class="tab-link"><i class="icon-tab material-icons">person</i><span class="tabbar-label">Profile</span></a>
+            <span class="tab-link-highlight" style="width: 25%; transform: translate3d(200%, 0px, 0px);"></span>
+        </div>
+    </div>
+    <div class="tabs-swipeable-wrap swiper-container swiper-container-horizontal swiper-container-android">
+        <div class="tabs swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+           
+	     <div id="tab1" class="page-content tab swiper-slide swiper-slide-active active" style="width: 360px;">
+                <div class="content-block page-home">
+                    <div class="row no-gutter work">
+                    </div>
+                </div>
+            </div>
+		
+            <div id="tab2" class="page-content tab swiper-slide swiper-slide-prev" style="width: 360px;">
+                <div class="content-block top-adjust">
+                    <div class="list-block accordion-list">
+                        <ul class="job_applied">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+		
+            <div id="tab3" class="page-content tab swiper-slide" style="width: 360px;">
+               <a href="new-advert.html" class="floating-button"><i class="icon icon-plus"></i></a>
+		  
+		    <div class="content-block top-adjust">
+                    <div class="list-block accordion-list">
+                        <ul class="job_offered">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+		<div id="tab4" class="page-content tab swiper-slide" style="width: 360px;">
+                <div class="top-adjust">
+                    <div class="page-content article home">
+                        <div class="navbar article">
+                        </div>
+                        <div class="header-container">
+                            <img class="profile-header" src="img/jambatan.jpg">
+                            <div class="item-media" style="position: absolute;top: calc(50% - 20vmin);left: calc(50% - 40vmin);">
+                                <img class="user_pic" src="img/gambar1.png" width="44" style="max-width: 20vmin;border: 3px solid white;">
+                                <a style="position: absolute; top: 10vmin; left: calc(50% + 15vmin); width: 50vmin; text-shadow: 2px 2px 2px #151515;" class="fullname">Mohd Amirul Ghanie</a>
+                            </div>
+                            <div class="opacity-container" style="bottom:5px;">
+                                <div class="profile-info">
+                                    <div class="row no-gutter">
+                                        <div class="col-33 info">Apply Job</div>
+                                        <div class="col-33 info">Offer Job</div>
+                                        <div class="col-33 info">Follower</div>
+                                    </div>
+                                    <div class="row no-gutter">
+                                        <div class="col-33 stats apply"></div>
+                                        <div class="col-33 stats offer"><a href="followers.html" class="link"></a></div>
+                                        <div class="col-33 stats follower"><a href="followers.html" class="link">30</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <article>
+                            <div class="card ks-card-header-pic">
+                                <div class="list-block media-list">
+                                    <ul>
+                                        <li>
+                                            <a href="rating.html" class="item-link item-content" style="background: white;">
+                                                <div class="item-media"><i class="material-icons round rating">star</i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title">My Rating</div>
+                                                    </div>
+                                                    <div class="item-subtitle">View all my rating</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="item-link item-content" style="background: white;">
+                                                <div class="item-media"><i class="material-icons round account">person</i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title">My Account</div>
+                                                    </div>
+                                                    <div class="item-subtitle">My account setting</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="item-link item-content" style="background: white;">
+                                                <div class="item-media"><i class="material-icons round favour">favorite</i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title">Favorite</div>
+                                                    </div>
+                                                    <div class="item-subtitle">My favorite list</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="item-link item-content" style="background: white;">
+                                                <div class="item-media"><i class="material-icons round book">book</i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title">Book</div>
+                                                    </div>
+                                                    <div class="item-subtitle">My book list</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="item-link item-content logout" style="background: white;">
+                                                <div class="item-media"><i class="material-icons round lgt">power_settings_new</i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title" onclick="signOut();">Logout</div>
+                                                    </div>
+                                                    <div class="item-subtitle">Quit this app</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

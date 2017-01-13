@@ -1,0 +1,96 @@
+<div class="views">
+    <div class="view view-main">
+        <div class="pages navbar-through">
+            <div data-page="new-advert" class="page">
+
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="left"><a href="#" class="link icon-only back"><i class="material-icons">arrow_back</i></a></div>
+                        <div class="center">New Advert</div>
+                    </div>
+                </div>
+                <div class="page-content">
+		    <form method="POST">
+                    <div class="list-block">
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon material-icons">title</i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title floating-label">Title</div>
+                                        <div class="item-input">
+                                            <input type="text" placeholder="Title" id="job_desc">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon material-icons">attach_money</i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title floating-label">Price</div>
+                                        <div class="item-input">
+                                            <input type="text" placeholder="Price" id="job_salary">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon material-icons">today</i></div>
+                                    <div class="item-inner not-empty-state">
+                                        <div class="item-title label">Date</div>
+                                        <div class="item-input item-input-field not-empty-state">
+                                            <input type="date" placeholder="Insert Date" class="not-empty-state" id="job_date_work" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon material-icons">add_location</i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title floating-label">Location</div>
+                                        <div class="item-input">
+                                            <input type="text" placeholder="Location" id="job_address">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon material-icons">view_module</i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title floating-label">Category</div>
+                                        <div class="col-100">
+                                            <div class="row">
+                                                <div class="item-input item-input-field not-empty-state" >
+                                                    <select class="not-empty-state" id="category_id">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon material-icons">description</i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title floating-label">Description</div>
+                                        <div class="item-input">
+                                            <textarea class="resizable" style="height: 37px;" id="job_details"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content-block cnfrm"><a href="#" class="button button-big" onclick="add_advert()">Confirm</a>
+                    </div>
+			  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
