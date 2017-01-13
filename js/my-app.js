@@ -425,7 +425,7 @@ myApp.onPageInit('list-work-aizal', function (page) {
 		$( ".details" ).html(list);
 	});
 });
-
+console.log(login_email);
 myApp.onPageInit('terms', function (page) {
 	var url = window.location.href; 
 	
