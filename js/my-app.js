@@ -466,11 +466,16 @@ myApp.onPageInit('new-advert', function (page) {
 
 myApp.onPageInit('profile-worker', function (page) {
 	var url = window.location.href; 
-	$.get( "api/getProfileWorker.php?id="+page.url.split('=')[1], function( data ) {
+	$.get( "api/getProfileWorker.php?id="+page.url.split('=')[1]+'&login_email='+login_email, function( data ) {
 		var list = '';
+		var list2 = '';
 		data = JSON.parse(data);
 		for (var i in data) {
+			console.log('follo'+data[i].follow_status);
+			console.log('nama'+data[i].fullname);
+			list2 += '<a href="#" class="link icon-only" style="line-height: 24px;"><span class="follow" id="'+data[i].user_email+'">+ follow</span></a>'
 			list +=
+				
 				'<div class="header-container">'+
 					'<img class="profile-header" src="img/jambatan.jpg">'+
 					'<div class="item-media" style="position: absolute;top: calc(50% - 20vmin);left: calc(50% - 40vmin);">'+
@@ -532,6 +537,7 @@ myApp.onPageInit('profile-worker', function (page) {
 				'</article>'	
 		}
 		$( ".profileWorker" ).html(list);
+		$( ".right" ).html(list2);
 	});
 });
 
@@ -666,8 +672,25 @@ $$(document).on('click', '.follow', function () {
     } else {
         $(this).text('+ follow');
     }
-    //    $(this).toggle('color-change')
-    //    var test = $(this).text('Following');
+    var employer_email = $('.follow').attr('id');
+    
+    $.ajax({
+		url : 'api/follow.php',
+		data : {
+			user_email : login_email,
+			employer_email : employer_email
+		},
+		type : 'POST',
+		success : function(res){
+		},
+		error : function(err){
+			alert(err.statusText);
+		}
+	});
+    
+    
+    
+    
 });
 
 //-----------------------------------------------------------------------------------------------------------------------berakhirnya sopia punye------------------------------------------------------------------

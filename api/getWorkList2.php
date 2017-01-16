@@ -9,7 +9,7 @@
 			WHERE 
 				job_offered.category_id LIKE '%{$id}%' AND 
 				job_category.category_id LIKE '%{$id}%' AND 
-				job_offered.user_id = user_profile.user_id AND 
+				job_offered.user_email = user_profile.user_email AND 
 				job_picture.job_id = job_offered.job_id 
 			";
 	
