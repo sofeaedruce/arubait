@@ -25,7 +25,8 @@
 			'cat_desc' => $row['category_desc'],
 			'details' => $row['job_details'],
 			'status' => $row['job_status'],
-			'id' => $row['job_id']
+			'id' => $row['job_id'],
+			'user_pic' => $row['user_pic']
 		));
 	}
 	echo json_encode($data); 

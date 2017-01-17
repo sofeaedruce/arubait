@@ -68,7 +68,7 @@ $$(document).on('click', '.logout', function () {
     });
 });
 
-$$(document).on('click', '.fav', function () {
+$$(document).on('click', '.book', function () {
     $(this).toggleClass('color-change')
 });
 
@@ -111,7 +111,7 @@ myApp.onPageInit('home', function (page) {
 					'<a href="#" class="item-link item-content">'+
 						'<div class="item-inner">'+
 							'<div class="item-media">'+
-								'<img src="img/gambar2.jpg" width="44" style="margin-top: 5px;">'+
+								'<img src="'+data[i].user_pic+'" width="44" style="margin-top: 5px;">'+
 							'</div>'+
 							'<div class="item-title-row" style="position: absolute; left: 62px;">'+
 								'<div class="item-title">'+data[i].work+'</div>'+
@@ -314,7 +314,7 @@ myApp.onPageInit('list-work-aizal', function (page) {
 								'<i class="material-icons fav">star</i>'+
 							'</a>'+
 							'<a href="#" class="link icon-only" onclick="book('+data[i].id+')">'+
-								'<i class="material-icons">book</i>'+
+								'<i class="material-icons book">book</i>'+
 							'</a>'+
 						'</div>'+
 					'</div>'+
@@ -591,7 +591,6 @@ function deleteJobApplied(id){
 	$.ajax({
 		url : 'api/deleteJobApplied.php?id='+id+'&login_email='+login_email,
 		success : function(res){
-			alert(res);
 			mainView.router.refreshPage();
 		},
 		error : function(err){
@@ -604,7 +603,6 @@ function deleteJobOffered(id){
 	$.ajax({
 		url : 'api/deleteJobOffered.php?id='+id,
 		success : function(res){
-			alert(res);
 			mainView.router.refreshPage();
 		},
 		error : function(err){
@@ -634,7 +632,6 @@ function deleteJobOffered(id){
 		},
 		type : 'POST',
 		success : function(res){
-			//alert(res);
 			mainView.router.loadPage('home.html');
 		},
 		error : function(err){
@@ -661,7 +658,6 @@ function book(id){
 	$.ajax({
 		url : 'api/bookJob.php?id='+id+'&login_email='+login_email,
 		success : function(res){
-			alert('yeay');
 		},
 		error : function(err){
 			alert(err.statusText);
