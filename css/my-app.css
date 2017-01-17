@@ -606,14 +606,25 @@ a.item-link.item-content.noti-tag {
     text-transform: capitalize;
     border: 1px #005fbe solid;
     border-radius: 3px;
-    color: #005fbe;}
-}
-
-
+    color: #005fbe;
+    }
 
 .adjust-font {
     font-weight: 200 !important;
 }
 i.material-icons.color.rating {
     color: #f66c26;
+}
+
+.item-inner.right-adjust {
+    padding-right: 0 !important;
+    background-image: none !important;
+}
+
+.follow-list {
+    background: rgb(246, 108, 38);
+    border: aliceblue;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 12px;
 }

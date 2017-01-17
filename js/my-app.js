@@ -95,6 +95,8 @@ $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onc
 //---------------------------------------------------------------------------------------------------------------------------sopia punye-------------------------------------------------------------------------------------
 var login_email = '';
 var followStatus = '';
+var bookStatus = '';
+
 myApp.onPageInit('home', function (page) {
 	var url = window.location.href; 
 	
@@ -426,6 +428,7 @@ myApp.onPageInit('list-work-aizal', function (page) {
 		$( ".details" ).html(list);
 	});
 });
+
 myApp.onPageInit('terms', function (page) {
 	var url = window.location.href; 
 	
@@ -487,11 +490,11 @@ myApp.onPageInit('profile-worker', function (page) {
 					'<div class="opacity-container" style="bottom:5px;">'+
 						'<div class="profile-info">'+
 							'<div class="row no-gutter" style="font-weight: 300;">'+
-								'<div class="col-50 info">Following</div>'+
+								'<div class="col-50 info"><a href="list-follower.html">Following</a></div>'+
 								'<div class="col-50 info">Follower</div>'+
 							'</div>'+
 							'<div class="row no-gutter">'+
-								'<div class="col-50 stats">4</div>'+
+								'<div class="col-50 stats"><a href="list-follower.html">4</a></div>'+
 								'<div class="col-50 stats"><a href="#" class="link">'+data[i].follow+'</a></div>'+
 							'</div>'+
 						'</div>'+
@@ -543,7 +546,20 @@ myApp.onPageInit('profile-worker', function (page) {
 	});
 });
 
-function add_advert(){
+myApp.onPageInit('list-follower ', function (page) {
+	var url = window.location.href; 
+	$.get( "api/getFollowerDetails.php?id="+page.url.split('=')[1]+'&login_email='+login_email, function( data ) {
+		var list = '';
+		data = JSON.parse(data);
+		for (var i in data) {
+			list +=
+					
+		}
+		$( "." ).html(list);
+	});
+});
+
+function add_advert() {
 	
 	var job_desc = $('#job_desc').val();
 	var job_salary = $('#job_salary').val();
@@ -574,7 +590,7 @@ function add_advert(){
 	});
 }
 
-function applyJob(id){
+function applyJob(id) {
 	$.ajax({
 		url : 'api/applyJob.php?id='+id+'&email='+login_email,
 		success : function(res){
@@ -587,7 +603,7 @@ function applyJob(id){
 	});
 }
 
-function deleteJobApplied(id){
+function deleteJobApplied(id) {
 	$.ajax({
 		url : 'api/deleteJobApplied.php?id='+id+'&login_email='+login_email,
 		success : function(res){
@@ -599,7 +615,7 @@ function deleteJobApplied(id){
 	});
 }
 
-function deleteJobOffered(id){
+function deleteJobOffered(id) {
 	$.ajax({
 		url : 'api/deleteJobOffered.php?id='+id,
 		success : function(res){
@@ -611,7 +627,7 @@ function deleteJobOffered(id){
 	});
 }
 
- function onSuccess(googleUser) {
+function onSuccess(googleUser) {
 	 
 	var profile = googleUser.getBasicProfile();
 	/* console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -652,7 +668,7 @@ function renderButton() {
 	});
 }
 
-function book(id){
+function book(id) {
 	var id = id;
 	console.log(id+'id');
 	$.ajax({
