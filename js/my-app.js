@@ -94,6 +94,7 @@ $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onc
 
 //---------------------------------------------------------------------------------------------------------------------------sopia punye-------------------------------------------------------------------------------------
 var login_email = '';
+var followStatus = '';
 myApp.onPageInit('home', function (page) {
 	var url = window.location.href; 
 	
@@ -312,7 +313,7 @@ myApp.onPageInit('list-work-aizal', function (page) {
 							'<a href="#" class="link icon-only">'+
 								'<i class="material-icons fav">star</i>'+
 							'</a>'+
-							'<a href="api/bookJob.php?id='+data[i].id+'" class="link icon-only">'+
+							'<a href="#" class="link icon-only" onclick="book('+data[i].id+')">'+
 								'<i class="material-icons">book</i>'+
 							'</a>'+
 						'</div>'+
@@ -425,7 +426,6 @@ myApp.onPageInit('list-work-aizal', function (page) {
 		$( ".details" ).html(list);
 	});
 });
-console.log(login_email);
 myApp.onPageInit('terms', function (page) {
 	var url = window.location.href; 
 	
@@ -471,9 +471,11 @@ myApp.onPageInit('profile-worker', function (page) {
 		var list2 = '';
 		data = JSON.parse(data);
 		for (var i in data) {
-			console.log('follo'+data[i].follow_status);
-			console.log('nama'+data[i].fullname);
-			list2 += '<a href="#" class="link icon-only" style="line-height: 24px;"><span class="follow" id="'+data[i].user_email+'">+ follow</span></a>'
+			followStatus = data[i].follow_status;
+			if (followStatus == null) {
+				followStatus = 'follow';
+			}
+			list2 += '<a href="#" class="link icon-only" style="line-height: 24px;"><span class="follow" id="'+data[i].user_email+'">'+followStatus+'</span></a>'
 			list +=
 				
 				'<div class="header-container">'+
@@ -654,9 +656,12 @@ function renderButton() {
 }
 
 function book(id){
+	var id = id;
+	console.log(id+'id');
 	$.ajax({
 		url : 'api/bookJob.php?id='+id+'&login_email='+login_email,
 		success : function(res){
+			alert('yeay');
 		},
 		error : function(err){
 			alert(err.statusText);
@@ -667,10 +672,10 @@ function book(id){
 $$(document).on('click', '.follow', function () {
     var test = $(this).text();
 
-    if (test == "+ follow") {
-        $(this).text('following');
+    if (test == "follow") {
+        $(this).text('unfollow');
     } else {
-        $(this).text('+ follow');
+        $(this).text('follow');
     }
     var employer_email = $('.follow').attr('id');
     
@@ -687,10 +692,6 @@ $$(document).on('click', '.follow', function () {
 			alert(err.statusText);
 		}
 	});
-    
-    
-    
-    
 });
 
 //-----------------------------------------------------------------------------------------------------------------------berakhirnya sopia punye------------------------------------------------------------------

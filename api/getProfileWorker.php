@@ -8,8 +8,8 @@
 			(SELECT COUNT(1) FROM job_applied WHERE job_applied.user_email = user_profile.user_email) apply,
 			(SELECT COUNT(1) FROM job_offered WHERE job_offered.user_email = user_profile.user_email) offer,
 			(SELECT COUNT(1) FROM follow WHERE follow.user_email = user_profile.user_email) follow,
-			(SELECT follow_status FROM follow WHERE follow.user_email = '$login_email' AND follow.employer_email = '$user_email') follow_status,
-			user_fullname, user_pic
+			(SELECT IF(follow_status=1,'unfollow','follow') FROM follow WHERE follow.user_email = '$login_email' AND follow.employer_email = '$user_email') follow_status,
+			user_fullname, user_pic, user_email
 		FROM user_profile
 		WHERE user_email = '$user_email'
 	";
