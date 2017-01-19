@@ -222,7 +222,7 @@ myApp.onPageInit('home', function (page) {
 
 myApp.onPageInit('work-list', function (page) {
 	var url = window.location.href; 
-	$.get( "api/getWorkList2.php?id="+page.url.split('=')[1], function( data ) {
+	$.get( "api/getWorkList2.php?id="+page.url.split('=')[1]+"&login_email="+login_email, function( data ) {
 		var list = '';
 		var desc = '';
 		data = JSON.parse(data);
@@ -278,9 +278,6 @@ myApp.onPageInit('work-list', function (page) {
 										'</div>'+
 										'<div class="col-10" style="text-align: left; ">'+
 										'</div>'+
-										'<div class="col-40" style="text-align: left; ">'+
-											'<div style="font-size: 3vmin; color: grey; line-height: 3vmin; font-weight: lighter; ">(Ratings)</div>'+
-										'</div>'+
 									'</div>'+
 								'</a>'+
 							'</div>'+
@@ -312,9 +309,6 @@ myApp.onPageInit('list-work-aizal', function (page) {
 						'<div class="left"><a href="#" class="link icon-only back"><i class="material-icons">arrow_back</i></a></div>'+
 						'<div class="center"></div>'+
 						'<div class="right">'+
-							'<a href="#" class="link icon-only">'+
-								'<i class="material-icons fav">star</i>'+
-							'</a>'+
 							'<a href="#" class="link icon-only" onclick="book('+data[i].id+')">'+
 								'<i class="material-icons book">book</i>'+
 							'</a>'+
@@ -386,9 +380,6 @@ myApp.onPageInit('list-work-aizal', function (page) {
                                                         '<i class="material-icons small-unrating">star</i>'+
                                                     '</div>'+
                                                     '<div class="col-10" style="text-align: left;"></div>'+
-                                                    '<div class="col-40" style="text-align: left;">'+
-                                                        '<div style="font-size: 3vmin;color: grey;line-height: 3vmin;font-weight: lighter;">(Ratings)</div>'+
-                                                '</div>'+
                                             '</div>'+
                                         '</div>'+
                                     '</div>'+
@@ -406,12 +397,8 @@ myApp.onPageInit('list-work-aizal', function (page) {
 				                '<div class="col-100" style="text-align: left;font-weight: bold;">'+data[i].cat_desc+'</div>'+
 				        '</div>'+
 				        '<div class="row">'+
-				            '<div class="col-100" style="text-align: left; font-weight: lighter;">Date</div>'+
+				            '<div class="col-100" style="text-align: left; font-weight: lighter;">Date Advertise</div>'+
 				            '<div class="col-100" style="text-align: left;font-weight: bold;">'+data[i].date+'</div>'+
-				        '</div>'+
-				        '<div class="row">'+
-				            '<div class="col-100" style="text-align: left; font-weight: lighter;">Status</div>'+
-				            '<div class="col-100" style="text-align: left;font-weight: bold;">'+data[i].status+'</div>'+
 				        '</div>'+
 				        '<div class="row">'+
 				            '<div class="col-100" style="text-align: left; font-weight: lighter;">Description</div>'+
@@ -546,19 +533,6 @@ myApp.onPageInit('profile-worker', function (page) {
 	});
 });
 
-myApp.onPageInit('list-follower ', function (page) {
-	var url = window.location.href; 
-	$.get( "api/getFollowerDetails.php?id="+page.url.split('=')[1]+'&login_email='+login_email, function( data ) {
-		var list = '';
-		data = JSON.parse(data);
-		for (var i in data) {
-			list +=
-					
-		}
-		$( "." ).html(list);
-	});
-});
-
 function add_advert() {
 	
 	var job_desc = $('#job_desc').val();
@@ -654,6 +628,10 @@ function onSuccess(googleUser) {
 			alert(err.statusText);
 		}
 	});
+	
+	
+	
+	
 }
     
 function onFailure(error) {

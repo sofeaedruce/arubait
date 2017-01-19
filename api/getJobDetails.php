@@ -7,12 +7,10 @@
 			FROM 
 				job_offered,
 				user_profile,
-				job_category,
-				job_picture
+				job_category
 			WHERE 
 				job_offered.job_id = '$id' AND  
 				job_offered.user_email = user_profile.user_email AND 
-				job_picture.job_id = '$id' AND 
 				job_category.category_id = job_offered.category_id
 			";
 	
@@ -25,9 +23,9 @@
 			'fullname' => $row['user_fullname'],
 			'salary' => $row['job_salary'],
 			'cat_desc' => $row['category_desc'],
-			'pic' => $row['pic_url'],
-			'pic2' => $row['pic2_url'],
-			'pic3' => $row['pic3_url'],
+			'pic' => $row['job_pic1'],
+			'pic2' => $row['job_pic2'],
+			'pic3' => $row['job_pic3'],
 			'date' => $row['job_date_work'],
 			'status' => $row['job_status'],
 			'details' => $row['job_details'],
