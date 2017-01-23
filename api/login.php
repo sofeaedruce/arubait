@@ -15,8 +15,4 @@
 						ON DUPLICATE KEY UPDATE user_pic = '$user_pics', user_fullname = '$user_fullname' ";
 	
 	$rs = mysql_query($query, $conn) or die(mysql_error());
-	
-	
-	
-	
 ?>

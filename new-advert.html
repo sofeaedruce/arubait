@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <div class="page-content">
-		    <form method="POST">
+				<form method="POST">
                     <div class="list-block">
                         <ul>
                             <li>
@@ -40,7 +40,7 @@
                                     <div class="item-inner not-empty-state">
                                         <div class="item-title label">Date</div>
                                         <div class="item-input item-input-field not-empty-state">
-                                            <input type="date" placeholder="Insert Date" class="not-empty-state" id="job_date_work" >
+                                            <input type="date" placeholder="Insert Date" class="not-empty-state" id="job_date_work">
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                         <div class="item-title floating-label">Category</div>
                                         <div class="col-100">
                                             <div class="row">
-                                                <div class="item-input item-input-field not-empty-state" >
+                                                <div class="item-input item-input-field not-empty-state">
                                                     <select class="not-empty-state" id="category_id">
                                                     </select>
                                                 </div>
@@ -83,11 +83,21 @@
                                     </div>
                                 </div>
                             </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="fa fa-camera fo-icon" aria-hidden="true"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title label">Upload</div>
+                                        <div class="button file-button upload">
+                                            <input type="file" name="pic1" id="pic1" accept="image/*">Upload a Photo
+										</div>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
-                    <div class="content-block cnfrm"><a href="#" class="button button-big" onclick="add_advert()">Confirm</a>
-                    </div>
-			  </form>
+					</form>
+                    <div class="content-block cnfrm"><a href="#" class="button button-big" onclick="add_advert()">Confirm</a></div>
                 </div>
             </div>
         </div>

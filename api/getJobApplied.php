@@ -11,7 +11,7 @@
 				job_category
 			WHERE 
 				job_applied.user_email = '$id' AND 
-				user_profile.user_email = '$id' AND 
+				job_offered.user_email = user_profile.user_email AND 
 				job_category.category_id = job_offered.category_id AND 
 				job_offered.job_id = job_applied.job_id
 			";
@@ -24,7 +24,7 @@
 			'date' => $row['job_date_work'],
 			'cat_desc' => $row['category_desc'],
 			'details' => $row['job_details'],
-			'status' => $row['job_status'],
+			'status' => $row['status'],
 			'id' => $row['job_id'],
 			'user_pic' => $row['user_pic']
 		));

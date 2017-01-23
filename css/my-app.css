@@ -628,3 +628,34 @@ i.material-icons.color.rating {
     color: #ffffff;
     font-size: 12px;
 }
+
+.file-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.file-button input {
+    font-size: 10000px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.button.upload {
+    background: rgba(255, 0, 0, 0);
+    border: 1px dashed #f66c26;
+    color: #f66c26;
+    margin-top: 5px;
+}
+
+.fo-icon {
+    font-size: 20px;
+    color: #f66c26;
+    text-align: center;
+    margin: 3px;
+}
+
+.item-media.fo-icon {
+    display: inline !important;
+}

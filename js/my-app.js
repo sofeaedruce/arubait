@@ -96,15 +96,16 @@ $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onc
 var login_email = '';
 var followStatus = '';
 var bookStatus = '';
+//var server_path = 'http://coralsoft.nc.com.my/arubait/';
 
 myApp.onPageInit('home', function (page) {
 	var url = window.location.href; 
 	
-	$.get( "api/getWorkList.php", function( data ) {
+	$.get("api/getWorkList.php", function( data ) {
 	  $( ".work" ).html( data );
 	});
 	
-	$.get( "api/getJobApplied.php?id="+login_email, function( data ) {
+	$.get("api/getJobApplied.php?id="+login_email, function( data ) {
 		var list = '';
 		data = JSON.parse(data);
 		for (var i in data) {
@@ -138,7 +139,7 @@ myApp.onPageInit('home', function (page) {
 											'</div>'+
 											'<div class="row">'+
 												'<div class="col-100" style="text-align: left; margin-top: 10px;">'+
-													'<a href="#">'+
+													'<a href="list_work_detail.html?id='+data[i].id+'">'+
 														'<i class="material-icons" style="color: grey;">remove_red_eye</i>'+
 													'</a>'+
 													'<a href="#" onclick="deleteJobApplied('+data[i].id+')">'+
@@ -157,7 +158,7 @@ myApp.onPageInit('home', function (page) {
 		$( ".job_applied" ).html(list);
 	});
 	
-	$.get( "api/getJobOffered.php?id="+login_email, function( data ) {
+	$.get("api/getJobOffered.php?id="+login_email, function( data ) {
 		var list = '';
 		data = JSON.parse(data);
 		for (var i in data) {
@@ -207,7 +208,7 @@ myApp.onPageInit('home', function (page) {
 		$( ".job_offered" ).html(list);
 	});
 	
-	$.get( "api/getProfileDetails.php?login_email="+login_email, function( data ) {
+	$.get("api/getProfileDetails.php?login_email="+login_email, function( data ) {
 		var list = '';
 		
 		data = JSON.parse(data);
@@ -222,7 +223,7 @@ myApp.onPageInit('home', function (page) {
 
 myApp.onPageInit('work-list', function (page) {
 	var url = window.location.href; 
-	$.get( "api/getWorkList2.php?id="+page.url.split('=')[1]+"&login_email="+login_email, function( data ) {
+	$.get("api/getWorkList2.php?id="+page.url.split('=')[1]+"&login_email="+login_email, function( data ) {
 		var list = '';
 		var desc = '';
 		data = JSON.parse(data);
@@ -299,7 +300,7 @@ myApp.onPageInit('work-list', function (page) {
 myApp.onPageInit('list-work-aizal', function (page) {
 	var url = window.location.href; 
 	
-	$.get( "api/getJobDetails.php?id="+page.url.split('=')[1], function( data ) {
+	$.get("api/getJobDetails.php?id="+page.url.split('=')[1], function( data ) {
 		var list = '';
 		data = JSON.parse(data);
 		for (var i in data) {
@@ -416,10 +417,130 @@ myApp.onPageInit('list-work-aizal', function (page) {
 	});
 });
 
+myApp.onPageInit('list-work-detail', function (page) {
+	var url = window.location.href; 
+	
+	$.get("api/getJobDetails.php?id="+page.url.split('=')[1], function( data ) {
+		var list = '';
+		data = JSON.parse(data);
+		for (var i in data) {
+			list +=
+				'<div class="navbar article">'+
+					'<div class="navbar-inner opacity-container-top">'+
+						'<div class="left"><a href="#" class="link icon-only back"><i class="material-icons">arrow_back</i></a></div>'+
+						'<div class="center"></div>'+
+						'<div class="right">'+
+							'<a href="#" class="link icon-only" onclick="book('+data[i].id+')">'+
+								'<i class="material-icons book">book</i>'+
+							'</a>'+
+						'</div>'+
+					'</div>'+
+				'</div>'+
+				'<div class="header-container">'+
+					'<div class="opacity-container" style="bottom:0px; z-index: 999">'+
+						'<div class="profile-info">'+
+							'<div class="row no-gutter" style="text-align: left;">'+
+								'<div class="col-100 info" style="text-align: left;font-weight:;font-size: 5vmin;margin-bottom: -5px;">'+data[i].work+'</div>'+
+							'</div>'+
+							'<div class="row no-gutter">'+
+								'<div class="col-100 stats" style="text-align: left;font-weight: lighter;font-size: 4vmin;">'+data[i].address+'</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>'+
+				'<div data-pagination=".swiper-pagination" data-paginationhide="true" class="swiper-container swiper-init ks-demo-slider swiper-container-horizontal swiper-container-android" style="margin-top: -53px;">'+
+					'<div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);transition-duration: 0ms;height: 288px;">'+
+						'<div style="width: 412px;" class="swiper-slide swiper-slide-active">'+
+							'<span class="swiper-zoom-container">'+
+								'<img src="'+data[i].pic+'" width="100%">'+
+							'</span>'+
+						'</div>'+
+						'<div style="width: 412px;" class="swiper-slide swiper-slide-next">'+
+							'<span class="swiper-zoom-container">'+
+								'<img src="'+data[i].pic2+'" width="100%">'+
+							'</span>'+
+						'</div>'+
+						'<div style="width: 412px;" class="swiper-slide">'+
+							'<span class="swiper-zoom-container">'+
+								'<img src="'+data[i].pic3+'" width="100%">'+
+							'</span>'+
+						'</div>'+
+						'<div style="width: 412px;" class="swiper-slide">'+
+							'<span class="swiper-zoom-container">'+
+								'<img src="'+data[i].pic3+'" width="100%">'+
+							'</span>'+
+						'</div>'+
+					'</div>'+
+				'</div>'+
+			'</div>'+
+				'<article>'+
+				    '<div class="card ks-card-header-pic">'+
+                        '<div class="card-footer">'+
+				            '<div class="item-media">'+
+				                '<a href="profile-worker.html?id='+data[i].user_email+'"><img src="'+data[i].user_pic+'" width="44" style="margin-top: 5px;"></a>'+
+				            '</div>'+
+				            '<div class="item-inner" style="margin-left: 20px;">'+
+				                '<div class="row no-gutter" style="text-align: left;">'+
+				                    '<a href="list_work.html">'+
+				                        '<div class="col-100 info" style="text-align: left;font-weight:;font-size: 4vmin;margin-bottom: -10px; color: grey;">'+data[i].fullname+'</div>'+
+				                        '<div class="row" style="padding-top:10px;text-align: left;font-size:1vmin;margin-bottom: 5px;">'+
+				                            '<div class="col-100">'+
+				                                '<div class="row">'+
+				                                    '<div class="col-10" style="text-align: left;">'+
+				                                        '<i class="material-icons small-rating">star</i>'+
+				                                    '</div>'+
+                                                    '<div class="col-10" style="text-align: left;">'+
+                                                        '<i class="material-icons small-rating">star</i>'+
+                                                    '</div>'+
+                                                    '<div class="col-10" style="text-align: left;">'+
+                                                        '<i class="material-icons small-rating">star</i>'+
+                                                    '</div>'+
+                                                    '<div class="col-10" style="text-align: left;">'+
+                                                        '<i class="material-icons small-rating">star</i>'+
+                                                    '</div>'+
+                                                    '<div class="col-10" style="text-align: left;">'+
+                                                        '<i class="material-icons small-unrating">star</i>'+
+                                                    '</div>'+
+                                                    '<div class="col-10" style="text-align: left;"></div>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</a>'+
+                            '</div>'+
+                        '</div>'+
+                        '<div class="icon-social">'+
+				            '<div class="link icon-only" style="color: green; padding-right: 15px; font-size: 4vmin;">RM'+data[i].salary+'</div>'+
+				        '</div>'+
+				    '</div>'+
+				    '<div class="card-footer">'+
+				        '<div class="col-100" style="font-size: 3vmin;">'+
+				            '<div class="row">'+
+				                '<div class="col-100" style="text-align: left; font-weight: lighter;">Category</div>'+
+				                '<div class="col-100" style="text-align: left;font-weight: bold;">'+data[i].cat_desc+'</div>'+
+				        '</div>'+
+				        '<div class="row">'+
+				            '<div class="col-100" style="text-align: left; font-weight: lighter;">Date Advertise</div>'+
+				            '<div class="col-100" style="text-align: left;font-weight: bold;">'+data[i].date+'</div>'+
+				        '</div>'+
+				        '<div class="row">'+
+				            '<div class="col-100" style="text-align: left; font-weight: lighter;">Description</div>'+
+				            '<div class="col-100" style="text-align: left;font-weight: bold;">'+data[i].details+'</div>'+
+				        '</div>'+
+				    '</div>'+
+				'</div>'+
+            '</div>'+
+            '<div class="content-block cnfrm">'+
+				'<a href="#" class="button button-big" >Applied</a>'+
+            '</div>'+
+        '</article>'
+		}
+		$( ".details" ).html(list);
+	});
+});
+
 myApp.onPageInit('terms', function (page) {
 	var url = window.location.href; 
 	
-	$.get( "api/getNotification.php?id="+login_email, function( data ) {
+	$.get("api/getNotification.php?id="+login_email, function( data ) {
 		var list = '';
 		data = JSON.parse(data);
 		for (var i in data) {
@@ -443,7 +564,7 @@ myApp.onPageInit('terms', function (page) {
 
 myApp.onPageInit('new-advert', function (page) {
 	
-	$.get( "api/getJobCategory.php", function( data ) {
+	$.get("api/getJobCategory.php", function( data ) {
 		var list = '';
 		data = JSON.parse(data);
 		for (var i in data) {
@@ -456,7 +577,7 @@ myApp.onPageInit('new-advert', function (page) {
 
 myApp.onPageInit('profile-worker', function (page) {
 	var url = window.location.href; 
-	$.get( "api/getProfileWorker.php?id="+page.url.split('=')[1]+'&login_email='+login_email, function( data ) {
+	$.get("api/getProfileWorker.php?id="+page.url.split('=')[1]+'&login_email='+login_email, function( data ) {
 		var list = '';
 		var list2 = '';
 		data = JSON.parse(data);
@@ -683,5 +804,19 @@ $$(document).on('click', '.follow', function () {
 		}
 	});
 });
+
+
+$(":file").change(function () {
+    if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = imageIsLoaded;
+        reader.readAsDataURL(this.files[0]);
+    }
+});
+
+function imageIsLoaded(e) {
+    $('img').attr('src', e.target.result);
+    $('img').fadeIn();
+};
 
 //-----------------------------------------------------------------------------------------------------------------------berakhirnya sopia punye------------------------------------------------------------------

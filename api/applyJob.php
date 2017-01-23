@@ -6,20 +6,20 @@
 
 	$query = "
 				INSERT INTO 
-					job_applied (job_id,user_email)
+					job_applied (job_id,user_email,status)
 				VALUES 
-					('$job_id','$user_email') 
+					('$job_id','$user_email','applied') 
 				";
 				    
-	$query2 = "
+	/* $query2 = "
 				UPDATE job_offered 
 					(job_status)
 				SET 
 					job_status = 'applied' 
 				WHERE 
 					job_id = '$job_id' 
-				";
+				"; */
 				    
 	$rs = mysql_query($query, $conn) or die(mysql_error());
-	$rs = mysql_query($query2, $conn) or die(mysql_error());
+	/* $rs = mysql_query($query2, $conn) or die(mysql_error()); */
 ?>
