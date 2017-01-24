@@ -573,6 +573,20 @@ myApp.onPageInit('new-advert', function (page) {
 		}
 		$( "#category_id" ).html(list);
 	});
+	
+	$(":file").change(function () {
+	    if (this.files && this.files[0]) {
+		  var reader = new FileReader();
+		  reader.onload = imageIsLoaded;
+		  reader.readAsDataURL(this.files[0]);
+	    }
+	});
+
+	function imageIsLoaded(e) {
+	    $('img').attr('src', e.target.result);
+	    $('img').fadeIn();
+	};
+
 });
 
 myApp.onPageInit('profile-worker', function (page) {
@@ -749,10 +763,6 @@ function onSuccess(googleUser) {
 			alert(err.statusText);
 		}
 	});
-	
-	
-	
-	
 }
     
 function onFailure(error) {
@@ -806,17 +816,5 @@ $$(document).on('click', '.follow', function () {
 });
 
 
-$(":file").change(function () {
-    if (this.files && this.files[0]) {
-        var reader = new FileReader();
-        reader.onload = imageIsLoaded;
-        reader.readAsDataURL(this.files[0]);
-    }
-});
-
-function imageIsLoaded(e) {
-    $('img').attr('src', e.target.result);
-    $('img').fadeIn();
-};
 
 //-----------------------------------------------------------------------------------------------------------------------berakhirnya sopia punye------------------------------------------------------------------
