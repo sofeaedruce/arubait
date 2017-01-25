@@ -573,20 +573,28 @@ myApp.onPageInit('new-advert', function (page) {
 		}
 		$( "#category_id" ).html(list);
 	});
-	
+	var imgId = '';
 	$(":file").change(function () {
 	    if (this.files && this.files[0]) {
 		  var reader = new FileReader();
 		  reader.onload = imageIsLoaded;
 		  reader.readAsDataURL(this.files[0]);
 	    }
+	    imgId = $(this).attr('id');
 	});
 
 	function imageIsLoaded(e) {
-	    $('img').attr('src', e.target.result);
-	    $('img').fadeIn();
+	    $('img#'+imgId).attr('src', e.target.result);
+	    $('img#'+imgId).fadeIn();
+	    $('.'+imgId+'.btn-img').addClass('btn-cancel fa-times').removeClass('fa-picture-o');
 	};
-
+	
+	$("img").click(function(){
+		var imgId = $(this).attr('id');
+		$('img#'+imgId).attr('src', '#');
+		$('img#'+imgId).fadeOut();
+		$('.'+imgId+'.btn-img').removeClass('btn-cancel fa-times').addClass('fa-picture-o');
+	});
 });
 
 myApp.onPageInit('profile-worker', function (page) {
@@ -607,19 +615,21 @@ myApp.onPageInit('profile-worker', function (page) {
 					'<img class="profile-header" src="img/jambatan.jpg">'+
 					'<div class="item-media" style="position: absolute;top: calc(50% - 20vmin);left: calc(50% - 40vmin);">'+
 						'<img src="'+data[i].user_pic+'" width="44" style="max-width: 20vmin;border: 3px solid white;">'+
-						'<a style="position: absolute; top: 10vmin; left: calc(50% + 15vmin); width: 50vmin; text-shadow: 2px 2px 2px #151515;">'+data[i].fullname+'</a>'+
+						/* '<a style="position: absolute; top: 10vmin; left: calc(50% + 15vmin); width: 50vmin; text-shadow: 2px 2px 2px #151515;">'+data[i].fullname+'</a>'+ */
+						'<a class="profile-name">'+data[i].fullname+'</a>'+
 					'</div>'+
 					'<div class="opacity-container" style="bottom:5px;">'+
 						'<div class="profile-info">'+
 							'<div class="row no-gutter" style="font-weight: 300;">'+
-								'<div class="col-50 info"><a href="list-follower.html">Following</a></div>'+
-								'<div class="col-50 info">Follower</div>'+
-							'</div>'+
-							'<div class="row no-gutter">'+
-								'<div class="col-50 stats"><a href="list-follower.html">4</a></div>'+
-								'<div class="col-50 stats"><a href="#" class="link">'+data[i].follow+'</a></div>'+
-							'</div>'+
+								'<div class="col-40 info">'+
+									'<a href="list-follower.html" style="text-shadow: 0px 0px 12px rgb(0, 0, 0);" class="">Following <span>'+data[i].follow+'</span></a>'+
+								'</div>'+
+								'<div class="col-20 info">'+
+									'<a href="list-follower.html" style="text-shadow: 0px 0px 12px rgb(0, 0, 0);">|</a>'+
+								'</div>'+
+								'<div class="col-40 info" style="text-shadow: 3px 1px 12px rgb(0, 0, 0);font-weight: 400;">Follower <span>100</span></div>'+
 						'</div>'+
+                            '</div>'+
 					'</div>'+
 				'</div>'+
 				'<article>'+
@@ -627,9 +637,9 @@ myApp.onPageInit('profile-worker', function (page) {
 						'<ul>'+
 							'<li>'+
 								'<div class="item-content">'+
-									'<div class="item-media"><i class="material-icons color rating">star_border</i></div>'+
+									'<div class="item-media fo-icon"><i class="fa fa-star-o fo-icon" aria-hidden="true"></i></div>'+
 									'<div class="item-inner" style="border-bottom: 1px rgba(255, 255, 255, 0) solid;">'+
-										'<div class="item-title adjust-font">Rating : &nbsp &nbsp &nbsp &nbsp  &nbsp  &nbsp '+
+										'<div class="item-title adjust-font">Rating :  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp '+
 											'<a href="rating.html"> <span class="" style="color: #f66c26;">2 out of 5</span> <span style="color: grey;font-size: 13px;" class="">( 35 Ratings )</span> </a>'+
 										'</div>'+
 									'</div>'+
@@ -637,15 +647,15 @@ myApp.onPageInit('profile-worker', function (page) {
 							'</li>'+
 							'<li>'+
 								'<div class="item-content">'+
-									'<div class="item-media"><i class="material-icons color rating">verified_user</i></div>'+
+									'<div class="item-media fo-icon"><i class="fa fa-user-o fo-icon" aria-hidden="true"></i></div>'+
 									'<div class="item-inner" style="border-bottom: 1px rgba(255, 255, 255, 0) solid;">'+
-										'<div class="item-title adjust-font">Joined : &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp<span style="color: #f66c26;">Two years ago</span></div>'+
+										'<div class="item-title adjust-font">Joined : &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<span style="color: #f66c26;">Two years ago</span></div>'+
 									'</div>'+
 								'</div>'+
 							'</li>'+
 							'<li>'+
 								'<div class="item-content">'+
-									'<div class="item-media"><i class="material-icons color rating">assignment_ind</i></div>'+
+									'<div class="item-media fo-icon"><i class="fa  fa-id-badge fo-icon" aria-hidden="true"></i></div>'+
 									'<div class="item-inner" style="border-bottom: 1px rgba(255, 255, 255, 0) solid;">'+
 										'<div class="item-title adjust-font">Job Applied : &nbsp &nbsp <span style="color: #f66c26;">'+data[i].apply+'</span></div>'+
 									'</div>'+
@@ -653,7 +663,7 @@ myApp.onPageInit('profile-worker', function (page) {
 							'</li>'+
 							'<li>'+
 								'<div class="item-content">'+
-									'<div class="item-media"><i class="material-icons color rating">person_pin</i></div>'+
+									'<div class="item-media fo-icon"><i class="fa fa-address-card-o fo-icon" aria-hidden="true"></i></div>'+
 									'<div class="item-inner" style="border-bottom: 1px rgba(255, 255, 255, 0) solid;">'+
 										'<div class="item-title adjust-font">Job Offered : &nbsp &nbsp <span style="color: #f66c26;">'+data[i].offer+'</span></div>'+
 									'</div>'+
@@ -668,6 +678,53 @@ myApp.onPageInit('profile-worker', function (page) {
 	});
 });
 
+myApp.onPageInit('list-follower', function (page) {
+	var url = window.location.href; 
+	$.get("api/getListFollower.php?id="+page.url.split('=')[1]+'&login_email='+login_email, function( data ) {
+		var list = '';
+		data = JSON.parse(data);
+		console.log(data);
+		for (var i in data) {
+			list +=
+				'<li class="accordion-item">'+
+					'<div class="item-inner right-adjust">'+
+						'<div class="item-media">'+
+							'<img src="'+data[i].user_pic+'" width="44" style="margin-top: 5px;">'+
+						'</div>'+
+						'<div class="item-title-row" style="position: absolute; left: 62px;">'+
+							'<div class="item-title">'+data[i].fullname+'</div>'+
+							'<div class="item-after" style="margin-left: 0;">'+
+								'<div class="row" style="padding-top: 5px;text-align: left;font-size:1vmin;margin-bottom: 5px;">'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-rating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-rating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-rating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-rating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-unrating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;"></div>'+
+									'<div class="col-40" style="text-align: left;">'+
+										'<div style="font-size: 3vmin;color: grey;line-height: 3vmin;font-weight: lighter;">(Ratings)</div>'+
+									'</div>'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+						'<div class="item-subtitle"><span class="button follow-list">follow</span></div>'+
+					'</div>'+
+				'</li>'
+		}
+		$("#listFollower").html(list);
+	});
+});
+
 function add_advert() {
 	
 	var job_desc = $('#job_desc').val();
@@ -677,6 +734,9 @@ function add_advert() {
 	var category_id = $('#category_id option:selected').val();
 	var job_details = $('#job_details').val();
 	var user_email = login_email;
+	var job_pic1 = $('#pic1').val();
+	var job_pic2 = $('#pic2').val();
+	var job_pic3 = $('#pic3').val();
 	$.ajax({
 		url : 'api/addAdvert.php',
 		data : {
@@ -686,7 +746,10 @@ function add_advert() {
 			job_address : job_address,
 			category_id : category_id,
 			job_details : job_details,
-			user_email : user_email
+			user_email : user_email,
+			job_pic1 : job_pic1,
+			job_pic2 : job_pic2,
+			job_pic3 : job_pic3
 		},
 		type : 'POST',
 		success : function(res){
