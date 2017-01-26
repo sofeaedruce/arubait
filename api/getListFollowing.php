@@ -6,7 +6,7 @@
 	$sql = "
 		SELECT *
 		FROM user_profile,follow
-		WHERE follow.employer_email = '$user_email' AND follow.user_email = user_profile.user_email AND follow_status = 1
+		WHERE follow.user_email = '$user_email' AND follow.employer_email = user_profile.user_email AND follow_status = 1
 	";
 	
 	$rs = mysql_query($sql, $conn) or die(mysql_error());

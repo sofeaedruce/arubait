@@ -109,6 +109,10 @@ myApp.onPageInit('home', function (page) {
 		var list = '';
 		data = JSON.parse(data);
 		for (var i in data) {
+			
+			if (data[i].status == 'confirmed') {
+				$( "#deleteJob" ).html("style","display:none;");
+			}
 			list +=
 				'<li class="accordion-item">'+
 					'<a href="#" class="item-link item-content">'+
@@ -142,7 +146,7 @@ myApp.onPageInit('home', function (page) {
 													'<a href="list_work_detail.html?id='+data[i].id+'">'+
 														'<i class="material-icons" style="color: grey;">remove_red_eye</i>'+
 													'</a>'+
-													'<a href="#" onclick="deleteJobApplied('+data[i].id+')">'+
+													'<a href="#" onclick="deleteJobApplied('+data[i].id+')" id="deleteJob">'+
 														'<i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>'+
 													'</a>'+
 												'</div>'+
@@ -259,7 +263,7 @@ myApp.onPageInit('work-list', function (page) {
 							'</div>'+
 							'<div class="item-inner" style="margin-left: 20px">'+
 								'<div class="row no-gutter" style="text-align: left;">'+
-									'<a href="list_work.html">'+
+									'<a href="profile-worker.html?id='+data[i].user_email+'">'+
 										'<div class="col-100 info" style="text-align: left; font-size: 3vmin; margin-bottom: -10px; color: grey;">'+data[i].fullname+'</div>'+
 										'<div class="row" style="padding-top:10px; text-align: left; font-size:1vmin+margin-bottom: 5px;">'+
 										'<div class="col-10" style="text-align: left; ">'+
@@ -589,11 +593,14 @@ myApp.onPageInit('new-advert', function (page) {
 	    $('.'+imgId+'.btn-img').addClass('btn-cancel fa-times').removeClass('fa-picture-o');
 	};
 	
-	$("img").click(function(){
+	$("input .btn-cancel").click(function(){
 		var imgId = $(this).attr('id');
 		$('img#'+imgId).attr('src', '#');
 		$('img#'+imgId).fadeOut();
 		$('.'+imgId+'.btn-img').removeClass('btn-cancel fa-times').addClass('fa-picture-o');
+		$('input#'+imgId).val('');
+		alert( 'buang' );
+		console.log($('input#'+imgId).val());
 	});
 });
 
@@ -622,12 +629,14 @@ myApp.onPageInit('profile-worker', function (page) {
 						'<div class="profile-info">'+
 							'<div class="row no-gutter" style="font-weight: 300;">'+
 								'<div class="col-40 info">'+
-									'<a href="list-follower.html" style="text-shadow: 0px 0px 12px rgb(0, 0, 0);" class="">Following <span>'+data[i].follow+'</span></a>'+
+									'<a href="list-following.html?id='+data[i].user_email+'" style="text-shadow: 0px 0px 12px rgb(0, 0, 0);" class="">Following  <span>'+data[i].following+'</span></a>'+
 								'</div>'+
 								'<div class="col-20 info">'+
-									'<a href="list-follower.html" style="text-shadow: 0px 0px 12px rgb(0, 0, 0);">|</a>'+
+									'<a href="#" style="text-shadow: 0px 0px 12px rgb(0, 0, 0);">|</a>'+
 								'</div>'+
-								'<div class="col-40 info" style="text-shadow: 3px 1px 12px rgb(0, 0, 0);font-weight: 400;">Follower <span>100</span></div>'+
+								'<div class="col-40 info">'+
+									'<a href="list-follower.html?id='+data[i].user_email+'" style="text-shadow: 0px 0px 12px rgb(0, 0, 0);" class="">Follower  <span>'+data[i].follower+'</span></a>'+
+								'</div>'+
 						'</div>'+
                             '</div>'+
 					'</div>'+
@@ -683,7 +692,6 @@ myApp.onPageInit('list-follower', function (page) {
 	$.get("api/getListFollower.php?id="+page.url.split('=')[1]+'&login_email='+login_email, function( data ) {
 		var list = '';
 		data = JSON.parse(data);
-		console.log(data);
 		for (var i in data) {
 			list +=
 				'<li class="accordion-item">'+
@@ -722,6 +730,52 @@ myApp.onPageInit('list-follower', function (page) {
 				'</li>'
 		}
 		$("#listFollower").html(list);
+	});
+});
+
+myApp.onPageInit('list-following', function (page) {
+	var url = window.location.href; 
+	$.get("api/getListFollowing.php?id="+page.url.split('=')[1]+'&login_email='+login_email, function( data ) {
+		var list = '';
+		data = JSON.parse(data);
+		for (var i in data) {
+			list +=
+				'<li class="accordion-item">'+
+					'<div class="item-inner right-adjust">'+
+						'<div class="item-media">'+
+							'<img src="'+data[i].user_pic+'" width="44" style="margin-top: 5px;">'+
+						'</div>'+
+						'<div class="item-title-row" style="position: absolute; left: 62px;">'+
+							'<div class="item-title">'+data[i].fullname+'</div>'+
+							'<div class="item-after" style="margin-left: 0;">'+
+								'<div class="row" style="padding-top: 5px;text-align: left;font-size:1vmin;margin-bottom: 5px;">'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-rating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-rating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-rating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-rating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-unrating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;"></div>'+
+									'<div class="col-40" style="text-align: left;">'+
+										'<div style="font-size: 3vmin;color: grey;line-height: 3vmin;font-weight: lighter;">(Ratings)</div>'+
+									'</div>'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+						'<div class="item-subtitle"><span class="button follow-list">follow</span></div>'+
+					'</div>'+
+				'</li>'
+		}
+		$("#listFollowing").html(list);
 	});
 });
 
@@ -842,7 +896,6 @@ function renderButton() {
 
 function book(id) {
 	var id = id;
-	console.log(id+'id');
 	$.ajax({
 		url : 'api/bookJob.php?id='+id+'&login_email='+login_email,
 		success : function(res){

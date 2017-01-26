@@ -5,7 +5,6 @@
 	
 	$query = " 
 				UPDATE job_offered 
-					(job_status)
 				SET 
 					job_status = 'cancelled' 
 				WHERE 
