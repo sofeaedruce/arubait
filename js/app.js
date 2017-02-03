@@ -9,9 +9,9 @@ window.addEventListener('load', function() {
 		lock.show();
 	});
 
-	btn_logout.addEventListener('click', function() {
+	/* btn_logout.addEventListener('click', function() {
 		logout();
-	});
+	}); */
 
 	lock.on("authenticated", function(authResult) {
 		lock.getProfile(authResult.idToken, function(error, profile) {
@@ -24,7 +24,7 @@ window.addEventListener('load', function() {
 			//show_profile_info(profile);
 			
 			//insert into database
-			var user_fullname = profile.nickname;
+			var user_fullname = profile.name;
 			var user_pic = profile.picture;
 			var user_email = profile.email;
 			login_email = profile.email;

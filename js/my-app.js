@@ -199,6 +199,9 @@ myApp.onPageInit('home', function (page) {
 													'<a href="#" onclick="deleteJobOffered('+data[i].id+')">'+
 														'<i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>'+
 													'</a>'+
+													'<a href="list-employee.html">'+
+														'<i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">contacts</i>'+
+													'</a>'+
 												'</div>'+
 											'</div>'+
 										'</div>'+
@@ -288,7 +291,7 @@ myApp.onPageInit('work-list', function (page) {
 							'</div>'+
 						 '</div>'+
 						 '<div class="icon-social">'+
-							'<div class="link icon-only" style="color: green; padding-right: 15px; font-size: 4vmin;">RM'+data[i].salary+'</div>'+
+							'<div class="link icon-only" style="color: green; padding-right: 15px; font-size: 4vmin;">RM'+data[i].salary+'.00</div>'+
 						 '</div>'+
 					 '</div>'+
 				 '</div>'+
@@ -392,7 +395,7 @@ myApp.onPageInit('list-work-aizal', function (page) {
                             '</div>'+
                         '</div>'+
                         '<div class="icon-social">'+
-				            '<div class="link icon-only" style="color: green; padding-right: 15px; font-size: 4vmin;">RM'+data[i].salary+'</div>'+
+				            '<div class="link icon-only" style="color: green; padding-right: 15px; font-size: 4vmin;">RM'+data[i].salary+'.00</div>'+
 				        '</div>'+
 				    '</div>'+
 				    '<div class="card-footer">'+
@@ -512,7 +515,7 @@ myApp.onPageInit('list-work-detail', function (page) {
                             '</div>'+
                         '</div>'+
                         '<div class="icon-social">'+
-				            '<div class="link icon-only" style="color: green; padding-right: 15px; font-size: 4vmin;">RM'+data[i].salary+'</div>'+
+				            '<div class="link icon-only" style="color: green; padding-right: 15px; font-size: 4vmin;">RM'+data[i].salary+'.00</div>'+
 				        '</div>'+
 				    '</div>'+
 				    '<div class="card-footer">'+
@@ -778,6 +781,53 @@ myApp.onPageInit('list-following', function (page) {
 		$("#listFollowing").html(list);
 	});
 });
+
+myApp.onPageInit('list-employee', function (page) {
+	var url = window.location.href; 
+	$.get("api/getListFollowing.php?id="+page.url.split('=')[1]+'&login_email='+login_email, function( data ) {
+		var list = '';
+		data = JSON.parse(data);
+		for (var i in data) {
+			list +=
+				'<li class="accordion-item">'+
+					'<div class="item-inner right-adjust">'+
+						'<div class="item-media">'+
+							'<img src="'+data[i].user_pic+'" width="44" style="margin-top: 5px;">'+
+						'</div>'+
+						'<div class="item-title-row" style="position: absolute; left: 62px;">'+
+							'<div class="item-title">'+data[i].fullname+'</div>'+
+							'<div class="item-after" style="margin-left: 0;">'+
+								'<div class="row" style="padding-top: 5px;text-align: left;font-size:1vmin;margin-bottom: 5px;">'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-rating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-rating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-rating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-rating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;">'+
+										'<i class="material-icons small-unrating">star</i>'+
+									'</div>'+
+									'<div class="col-10" style="text-align: left;"></div>'+
+									'<div class="col-40" style="text-align: left;">'+
+										'<div style="font-size: 3vmin;color: grey;line-height: 3vmin;font-weight: lighter;">(Ratings)</div>'+
+									'</div>'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+						'<div class="item-subtitle"><span class="button follow-list">follow</span></div>'+
+					'</div>'+
+				'</li>'
+		}
+		$("#listEmployee").html(list);
+	});
+});
+
 
 function add_advert() {
 	

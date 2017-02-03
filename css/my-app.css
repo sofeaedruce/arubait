@@ -395,6 +395,8 @@ p.title img,
 
 .lgn .button {
     background: rgba(0, 0, 0, 0) linear-gradient(135deg, #ee6b29 0%, #ff6d23 100%) repeat scroll 0 0;
+	display: inline-block;
+    width: 100%;
 }
 
 .tabbar a.tab-link {
