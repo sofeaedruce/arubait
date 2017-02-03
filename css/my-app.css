@@ -730,3 +730,6 @@ a.profile-name {
 .adjust-top {
     margin-top: 50px;
 }
+.btn-login {
+	 z-index: 999;
+}

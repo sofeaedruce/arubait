@@ -10,13 +10,16 @@
     <title>Arubait</title>
     <link rel="stylesheet" href="css/framework7.material.css">
     <link rel="stylesheet" href="css/framework7.material.colors.css">
-	 <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/default-style.css">
     <link rel="stylesheet" href="css/my-app.css">
     <link href="css/css.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="img/arubait_icon.png" type="image/x-icon" />
     <link rel="apple-touch-icon" href="img/arubait_icon.png">
     <link rel="apple-touch-icon-precomposed" href="img/arubait_icon.png">
+    <script src="js/lock.min.js"></script>
+    <script src="js/auth0-variables.js"></script>
+    <script src="js/app.js"></script>
 </head>
 <body>
     <div class="panel-overlay"></div>
@@ -24,6 +27,7 @@
         <div class="view view-main">
             <div class="pages navbar-fixed">
                 <div data-page="index" class="page">
+	
                     <div class="page-content">
                         <div class="image-background">
                             <img src="img/post3.jpg">
@@ -35,11 +39,12 @@
                                         <p class="title">
                                             <img src="img/Arubait_logo.png">
                                         </p>
-                                        <div class="content-block row ">
-                                            <div class="col-100">
+                                        <div class="content-block row "> 
+											<div class="col-100">
                                                 <a href="#" class="item-link item-content lgn">
                                                     <div class="item-media">
-									  <div id="my-signin2"></div>
+														<button type="submit" id="btn-login" class="button">Sign In</button>
+														<button type="submit" id="btn-logout" class="button"style="display:none;">Sign Out</button>
                                                     </div>
                                                 </a>
                                             </div>
