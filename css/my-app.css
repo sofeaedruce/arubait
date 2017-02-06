@@ -600,6 +600,14 @@ a.item-link.item-content.noti-tag {
     color: #e00472;
 }
 
+.reopen {
+    background: rgba(255, 255, 255, 0);
+    text-transform: capitalize;
+    border: 1px #e00472 solid;
+    border-radius: 3px;
+    color: #e00472;
+}
+
 .rejected {
     background: rgba(255, 255, 255, 0);
     text-transform: capitalize;
@@ -658,6 +666,23 @@ i.material-icons.color.rating {
     border-radius: 3px;
     color: #ffffff;
     font-size: 12px;
+}
+
+.button.applied {
+    background: rgb(246, 108, 38);
+    border: aliceblue;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.button.accepted {
+    background: grey;
+    border: aliceblue;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 12px;
+    pointer-events: none;
 }
 
 .file-button {

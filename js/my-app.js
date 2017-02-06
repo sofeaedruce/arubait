@@ -199,7 +199,7 @@ myApp.onPageInit('home', function (page) {
 													'<a href="#" onclick="deleteJobOffered('+data[i].id+')">'+
 														'<i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>'+
 													'</a>'+
-													'<a href="list-employee.html">'+
+													'<a href="list-employee.html?id='+data[i].id+'">'+
 														'<i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">contacts</i>'+
 													'</a>'+
 												'</div>'+
@@ -547,17 +547,17 @@ myApp.onPageInit('list-work-detail', function (page) {
 myApp.onPageInit('terms', function (page) {
 	var url = window.location.href; 
 	
-	$.get("api/getNotification.php?id="+login_email, function( data ) {
+	$.get("api/getNotification.php?login_email="+login_email, function( data ) {
 		var list = '';
 		data = JSON.parse(data);
 		for (var i in data) {
 			list +=
 				'<li>'+
 					'<a href="#" class="item-link item-content noti-tag">'+
-						'<div class="item-media"><img src="img/gambar1.jpg" width="80"></div>'+
+						'<div class="item-media"><img src="'+data[i].user_pic+'" width="80"></div>'+
 						'<div class="item-inner">'+
 							'<div class="item-title-row">'+
-								'<div class="item-title">work name</div>'+
+								'<div class="item-title">'+data[i].job_desc+'</div>'+
 								'<div class="item-after">12:02</div>'+
 							'</div>'+
 							'<div class="item-text">'+data[i].desc+'</div>'+
@@ -783,11 +783,13 @@ myApp.onPageInit('list-following', function (page) {
 });
 
 myApp.onPageInit('list-employee', function (page) {
-	var url = window.location.href; 
-	$.get("api/getListFollowing.php?id="+page.url.split('=')[1]+'&login_email='+login_email, function( data ) {
+	var url = window.location.href;
+	$.get("api/getListEmployee.php?id="+page.url.split('=')[1]+'&login_email='+login_email, function( data ) {
 		var list = '';
+		var list2 = '';
 		data = JSON.parse(data);
 		for (var i in data) {
+			list2 +=
 			list +=
 				'<li class="accordion-item">'+
 					'<div class="item-inner right-adjust">'+
@@ -820,14 +822,13 @@ myApp.onPageInit('list-employee', function (page) {
 								'</div>'+
 							'</div>'+
 						'</div>'+
-						'<div class="item-subtitle"><span class="button follow-list">follow</span></div>'+
+						'<a href="#" class="button '+data[i].status+'" onclick="acceptEmployee(\''+data[i].user_email+'\',\''+data[i].job_id+'\');">'+data[i].status+'</a>'+
 					'</div>'+
 				'</li>'
 		}
 		$("#listEmployee").html(list);
 	});
 });
-
 
 function add_advert() {
 	
@@ -841,6 +842,7 @@ function add_advert() {
 	var job_pic1 = $('#pic1').val();
 	var job_pic2 = $('#pic2').val();
 	var job_pic3 = $('#pic3').val();
+	
 	$.ajax({
 		url : 'api/addAdvert.php',
 		data : {
@@ -903,13 +905,24 @@ function deleteJobOffered(id) {
 	});
 }
 
-/* function onSuccess(googleUser) {
+function acceptEmployee(user_email,job_id) {
+	$.ajax({
+		url : 'api/acceptEmployee.php?job_id='+job_id+'&user_email='+user_email+'&login_email='+login_email,
+		success : function(res){
+		},
+		error : function(err){
+			alert(err.statusText);
+		}
+	});
+}
+
+ function onSuccess(googleUser) {
 	 
 	var profile = googleUser.getBasicProfile();
-	 console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	/* console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
 	console.log('Name: ' + profile.getName());
 	console.log('Image URL: ' + profile.getImageUrl());
-	console.log('Email: ' + profile.getEmail());
+	console.log('Email: ' + profile.getEmail()); */
 	 
 	var user_fullname = profile.getName();
 	var user_pic = profile.getImageUrl();
@@ -942,7 +955,7 @@ function renderButton() {
 		  'onsuccess': onSuccess,
 		  'onfailure': onFailure
 	});
-} */
+} 
 
 function book(id) {
 	var id = id;
