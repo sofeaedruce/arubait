@@ -19,7 +19,7 @@
 					noti_target, 
 					user_email) 
 				VALUES (
-					'Application for $job_id has been Accepted',
+					'Your application for the job has been accepted. Click to confirm.',
 					'$job_id',
 					'$noti_target',
 					'$user_email') 

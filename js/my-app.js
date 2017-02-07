@@ -15,8 +15,6 @@ var $$ = Dom7;
 var mainView = myApp.addView('.view-main', {});
 
 // GENERAL
-
-
 $$('a').on('click', function (e) { //Close panel when you open a new page
     myApp.closePanel();
 });
@@ -28,28 +26,9 @@ $$('a.more').on('click', function (e) { //Close popover when you open a new page
     myApp.closeModal('.popover-more');
 });
 
-$$(document).on('click', '.alert-text', function () {
-    myApp.modal({
-        title: 'Forgot Password ?',
-        text: 'Please enter your email',
-        afterText: '<input type="text" class="modal-text-input" placeholder="Your email">',
-        buttons: [{
-            text: 'OK',
-            //            onClick: function () {
-            //                myApp.alert('You clicked Ok!');
-            //            }
-    }, {
-            text: 'Cancel',
-            //            onClick: function () {
-            //                myApp.alert('You clicked Cancel!');
-            //            }
-    }, ]
-    });
-});
-
 $$(document).on('click', '.logout', function () {
     myApp.modal({
-        title: 'Are sure want to exit ?',
+        title: 'Are you sure ?',
         buttons: [{
             text: 'OK',
             onClick: function signOut() {
@@ -86,11 +65,9 @@ $$(document).on('pageInit', function (e) {
 });
 
 // ICONS TRANSITIONS
-
 $$('i.material-icons.fav').on('click', function (e) { //Changing color icons onclick
     $$(this).toggleClass('color-change');
 });
-
 
 //---------------------------------------------------------------------------------------------------------------------------sopia punye-------------------------------------------------------------------------------------
 var login_email = '';
@@ -101,8 +78,16 @@ var bookStatus = '';
 myApp.onPageInit('home', function (page) {
 	var url = window.location.href; 
 	
+	$.get("api/getTotalNoti.php?login_email="+login_email, function( data ) {
+		data = JSON.parse(data);
+		console.log(data[0].noti);
+		if (data[0].noti > 0) {
+			$( ".noti" ).addClass('badge noti-no').text(data[0].noti);
+		}
+	});
+	
 	$.get("api/getWorkList.php", function( data ) {
-	  $( ".work" ).html( data );
+		$( ".work" ).html( data );
 	});
 	
 	$.get("api/getJobApplied.php?id="+login_email, function( data ) {
@@ -196,7 +181,7 @@ myApp.onPageInit('home', function (page) {
 													'<a href="#">'+
 														'<i class="material-icons" style="color: grey;">remove_red_eye</i>'+
 													'</a>'+
-													'<a href="#" onclick="deleteJobOffered('+data[i].id+')">'+
+													'<a href="#" class="deleteJob">'+
 														'<i class="material-icons" style="color: #ff2c2c; margin-left: 10px;">delete</i>'+
 													'</a>'+
 													'<a href="list-employee.html?id='+data[i].id+'">'+
@@ -893,18 +878,6 @@ function deleteJobApplied(id) {
 	});
 }
 
-function deleteJobOffered(id) {
-	$.ajax({
-		url : 'api/deleteJobOffered.php?id='+id,
-		success : function(res){
-			mainView.router.refreshPage();
-		},
-		error : function(err){
-			alert(err.statusText);
-		}
-	});
-}
-
 function acceptEmployee(user_email,job_id) {
 	$.ajax({
 		url : 'api/acceptEmployee.php?job_id='+job_id+'&user_email='+user_email+'&login_email='+login_email,
@@ -994,6 +967,31 @@ $$(document).on('click', '.follow', function () {
 	});
 });
 
+$$(document).on('click', '.deleteJob', function () {
+    myApp.modal({
+        title: 'Delete this job ?',
+        buttons: [{
+            text: 'OK',
+            onClick: function deleteJobOffered(id) {
+			console.log(id);
+			$.ajax({
+				url : 'api/deleteJobOffered.php?id='+id,
+				success : function(res){
+					mainView.router.refreshPage();
+				},
+				error : function(err){
+					alert(err.statusText);
+				}
+			});
+		}
+    }, {
+            text: 'Cancel',
+            //            onClick: function () {
+            //                myApp.alert('You clicked Cancel!');
+            //            }
+    }, ]
+    });
+});
 
 
 //-----------------------------------------------------------------------------------------------------------------------berakhirnya sopia punye------------------------------------------------------------------

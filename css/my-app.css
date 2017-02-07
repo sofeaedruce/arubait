@@ -627,9 +627,9 @@ a.item-link.item-content.noti-tag {
 .accepted {
     background: rgba(255, 255, 255, 0);
     text-transform: capitalize;
-    border: 1px #ff2c2c solid;
+    border: 1px #8bc34a solid;
     border-radius: 3px;
-    color: #ff2c2c;
+    color: #8bc34a;
 }
 
 .confirmed {
